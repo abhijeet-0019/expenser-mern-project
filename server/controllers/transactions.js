@@ -29,7 +29,7 @@ const postTransaction = async(req, res)=>{
 
 const getTransaction = async(req, res)=>{
     try{
-        const response = await Transaction.find({});
+        const response = await Transaction.find({}).sort({createdAt: -1});
         res.status(200).json(
             {
                 success:true,
