@@ -8,7 +8,7 @@ router.get("/", (req, res)=>{
     console.log("root node");
 });
 
-router.post("/p_transaction", postTransaction);
-router.get("/g_transaction", getTransaction);
+router.post("/transaction", postTransaction);
+router.get("/transaction", getTransaction);
 
 module.exports = router;

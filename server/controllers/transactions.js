@@ -48,5 +48,4 @@ const getTransaction = async(req, res)=>{
     }
 }
 
-
 module.exports = {postTransaction, getTransaction}
