@@ -5,6 +5,7 @@ import DataTable from './components/DataTable';
 
 function App() {
   const [transaction, setTransaction] = useState([])
+  const [editTransaction, setEditTransaction] = useState({});
   useEffect(()=>{
     fetchTransaction();
   }, [])
@@ -12,15 +13,15 @@ function App() {
     const res = await fetch("http://localhost:4000/api/v1/transaction");
     const {data} = await res.json();
     setTransaction(data);
-    console.log(data);
+    // console.log(data);
   }
   return (
     <div>
     <Appbar />
-    <TransactionForm fetchTransaction={fetchTransaction}/>
+    <TransactionForm fetchTransaction={fetchTransaction} editTransaction={editTransaction} setEditTransaction={setEditTransaction}/>
       <br/>
       <br/>
-      <DataTable transaction={transaction}/>
+      <DataTable transaction={transaction} fetchTransaction={fetchTransaction} setEditTransaction={setEditTransaction}/>
     </div>
   );
 }
