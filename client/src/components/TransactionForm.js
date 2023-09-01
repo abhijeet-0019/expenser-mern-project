@@ -113,7 +113,7 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
                                 value={dayjs(form.date)}
                                 onChange={handleDate}
                                 renderInput={(params) => (
-                                    <TextField sx={{ marginRight: 5 }} size='small' {...params} />
+                                    <TextField sx={{ marginRight: 5, marginTop: '10px' }} size='small' {...params} />
                                 )}
                             />
                         </LocalizationProvider>
