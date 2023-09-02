@@ -10,13 +10,14 @@ import { Container, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
+import env from "react-dotenv";
 
 export default function DataTable({ transaction, fetchTransaction, setEditTransaction }) {
     async function remove(id) {
         if (!window.confirm("Are You Sure ?")) return;
         // console.log("id -> ", id);
         // let a = 0;
-        const res = await fetch(`http://localhost:4000/api/v1/transaction/${id}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction/${id}`, {
             method: "DELETE",
         });
         // console.log(res);

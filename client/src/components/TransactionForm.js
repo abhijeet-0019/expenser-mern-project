@@ -56,7 +56,7 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
 
     async function create(){
         // Convert the date string to a Date object
-        const res = await fetch('http://localhost:4000/api/v1/transaction', {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction`, {
             method: "POST",
             body: JSON.stringify(form),
             headers: {
@@ -67,7 +67,7 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
     }
     async function update(){
         const dateObject = new Date(form.date);
-        const res = await fetch(`http://localhost:4000/api/v1/transaction/${editTransaction._id}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction/${editTransaction._id}`, {
             method: "PATCH",
             body: JSON.stringify({...form, date: dateObject}),
             headers: {

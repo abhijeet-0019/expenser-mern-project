@@ -1,11 +1,12 @@
 const User = require('../models/user');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+require("dotenv").config();
 
 let opts = {};
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'abhijeet';
+opts.secretOrKey = process.env.SECRET_JWT;
 
 module.exports = (passport) => {
   passport.use(
