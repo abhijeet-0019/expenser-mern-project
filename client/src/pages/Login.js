@@ -9,16 +9,18 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import Cookie from 'js-cookie';
 
 export default function Login() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
     const requestData = {
       email: data.get('email'),
       password: data.get('password'),
@@ -30,8 +32,12 @@ export default function Login() {
         "content-type": "application/json"
       }
     })
+    const res_data = await res.json();
+    // console.log("-> ", res_data.token);
     if(res.ok){
-      console.log("logined !!!");
+      console.log("logined !!");
+      Cookie.set('token', res_data.token);
+      navigate("/");
     }
   };
 

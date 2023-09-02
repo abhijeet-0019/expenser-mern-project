@@ -30,23 +30,21 @@ const postTransaction = async (req, res) => {
 const getTransaction = async (req, res) => {
     try {
         const response = await Transaction.find({}).sort({ createdAt: -1 });
-        res.status(200).json(
-            {
-                success: true,
-                data: response,
-                message: "Entries Fetched Successfully"
-            }
-        )
+        res.status(200).json({
+            success: true,
+            data: response,
+            message: "Entries Fetched Successfully"
+        });
     } catch (err) {
         console.error(err);
-        console.log(err);
         res.status(500).json({
             success: false,
-            data: "unable to fetch transaction",
-            message: err.message
-        })
+            data: null,
+            message: "Unable to fetch transactions",
+            error: err.message
+        });
     }
-}
+};
 
 const updateTransaction = async (req, res) => {
     try {

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
 
 const {postTransaction, getTransaction, deleteTransaction, updateTransaction} = require("../controllers/transactions");
 const {registerUser, loginUser} = require("../controllers/auth");
@@ -11,7 +12,7 @@ router.get("/", (req, res)=>{
 
 // transactions routes
 router.post("/transaction", postTransaction);
-router.get("/transaction", getTransaction);
+router.get("/transaction", passport.authenticate('jwt', { session: false }), getTransaction);
 router.delete('/transaction/:id', deleteTransaction);
 router.patch('/transaction/:id', updateTransaction);
 
@@ -19,4 +20,8 @@ router.patch('/transaction/:id', updateTransaction);
 router.post("/auth/register", registerUser);
 router.post("/auth/login", loginUser);
 
+// router.get("/", passport.authenticate("jwt", {session: false}),
+//     (req, res) => {
+//   res.json({ user: req.user });
+// )
 module.exports = router;
