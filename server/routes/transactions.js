@@ -20,6 +20,12 @@ router.patch('/transaction/:id', updateTransaction);
 router.post("/auth/register", registerUser);
 router.post("/auth/login", loginUser);
 
+// getting user routes
+router.post("/user", passport.authenticate('jwt', { session: false }), (req, res)=>{
+    console.log(req.user);
+    res.json({user: req.user});
+})
+
 // router.get("/", passport.authenticate("jwt", {session: false}),
 //     (req, res) => {
 //   res.json({ user: req.user });
