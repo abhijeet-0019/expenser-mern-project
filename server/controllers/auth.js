@@ -73,6 +73,7 @@ const loginUser = async (req, res) => {
             {
                 success: true,
                 token,
+                userExist,
                 message: "Logged in Successfully, user verified !!"
             }
         )

@@ -22,7 +22,7 @@ router.post("/auth/login", loginUser);
 
 // getting user routes
 router.post("/user", passport.authenticate('jwt', { session: false }), (req, res)=>{
-    console.log(req.user);
+    console.log("--> --> ", req.user);
     res.json({user: req.user});
 })
 
