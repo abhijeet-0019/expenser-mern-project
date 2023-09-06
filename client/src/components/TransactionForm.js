@@ -22,9 +22,9 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
 
     React.useEffect(() => {
         if (!editTransaction.amount) {
-            console.log("empty");
+            // console.log("empty");
         } else {
-            console.log("filled");
+            // console.log("filled");
             setForm({
                 ...form,
                 amount: editTransaction.amount,

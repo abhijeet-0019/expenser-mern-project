@@ -7,7 +7,7 @@ const {registerUser, loginUser} = require("../controllers/auth");
 
 router.get("/", (req, res)=>{
     res.send(`<h1>hello there from trans</h1>`)
-    console.log("root node");
+    // console.log("root node");
 });
 
 // transactions routes

@@ -21,7 +21,7 @@ function App() {
     });
     if (res.ok) {
       const user = await res.json();
-      console.log("user --> ", user);
+      // console.log("user --> ", user);
       dispatch(getUser(user));
     }
     setIsLoading(false);

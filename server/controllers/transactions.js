@@ -49,7 +49,7 @@ const getTransaction = async (req, res) => {
 const updateTransaction = async (req, res) => {
     try {
         const id = req.params.id;
-        console.log("updated body", req.body.amount);
+        // console.log("updated body", req.body.amount);
         const { amount, description, date } = req.body;
         const response = await Transaction.findByIdAndUpdate({ _id: id },
             {

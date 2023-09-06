@@ -23,5 +23,5 @@ app.listen(PORT, ()=>{
 
 app.get("/", (req, res)=>{
     res.send(`<h2>hello there mate</h2>`);
-    console.log("-->");
+    // console.log("-->");
 })

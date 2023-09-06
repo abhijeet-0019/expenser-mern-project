@@ -17,12 +17,12 @@ export default function Register() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            firstName: data.get('firstName'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        // console.log({
+        //     firstName: data.get('firstName'),
+        //     lastName: data.get('lastName'),
+        //     email: data.get('email'),
+        //     password: data.get('password'),
+        // });
         const requestData = {
             firstName: data.get('firstName'),
             lastName: data.get('lastName'),

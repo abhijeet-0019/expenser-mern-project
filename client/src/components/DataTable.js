@@ -22,7 +22,7 @@ export default function DataTable({ transaction, fetchTransaction, setEditTransa
         });
         // console.log(res);
         if (res.ok) {
-            console.log(res);
+            // console.log(res);
             fetchTransaction();
             window.alert('Deleted Successfully');
         }
