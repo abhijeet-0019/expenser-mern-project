@@ -11,9 +11,9 @@ router.get("/", (req, res)=>{
 });
 
 // transactions routes
-router.post("/transaction", postTransaction);
+router.post("/transaction",passport.authenticate('jwt', { session: false }), postTransaction);
 router.get("/transaction", passport.authenticate('jwt', { session: false }), getTransaction);
-router.delete('/transaction/:id', deleteTransaction);
+router.delete('/transaction/:id',passport.authenticate('jwt', { session: false }), deleteTransaction);
 router.patch('/transaction/:id', updateTransaction);
 
 // auth routes

@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
+import Cookies from 'js-cookie';
 import dayjs from 'dayjs';
 
 const initialForm = {
@@ -19,6 +20,8 @@ const initialForm = {
 
 export default function TransactionForm({ fetchTransaction, editTransaction, setEditTransaction }) {
     const [form, setForm] = React.useState(initialForm);
+
+    const token = Cookies.get('token');
 
     React.useEffect(() => {
         if (!editTransaction.amount) {
@@ -43,10 +46,10 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const res = (editTransaction.amount)? update(): create();
+        const res = (editTransaction.amount) ? update() : create();
     }
 
-    function reload(res){
+    function reload(res) {
         if (res.ok) {
             fetchTransaction();
         }
@@ -54,22 +57,23 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
         setEditTransaction({})
     }
 
-    async function create(){
+    async function create() {
         // Convert the date string to a Date object
         const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction`, {
             method: "POST",
             body: JSON.stringify(form),
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                Authorization: `Bearer ${token}`,
             }
         });
         reload(res);
     }
-    async function update(){
+    async function update() {
         const dateObject = new Date(form.date);
         const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction/${editTransaction._id}`, {
             method: "PATCH",
-            body: JSON.stringify({...form, date: dateObject}),
+            body: JSON.stringify({ ...form, date: dateObject }),
             headers: {
                 "content-type": "application/json"
             }
@@ -82,7 +86,7 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
             <Card sx={{ minWidth: 275, marginTop: 10 }}>
                 <CardContent>
                     <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                        Add new Transaction
+                        Add New Transaction
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <TextField
@@ -123,7 +127,7 @@ export default function TransactionForm({ fetchTransaction, editTransaction, set
                                     Update
                                 </Button>
                             ) : (
-                                <Button type="submit" variant="contained" sx={{marginLeft: 5}}>
+                                <Button type="submit" variant="contained" sx={{ marginLeft: 5 }}>
                                     Submit
                                 </Button>
                             )

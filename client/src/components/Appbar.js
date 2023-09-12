@@ -7,13 +7,15 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import {userLogout} from '../store/auth'
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../store/auth'
 
 export default function Appbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  function logout(){
+  // const cookie = Cookies.get('token');
+  const auth = useSelector(state => state.auth.isAuthenticated);
+  function logout() {
     Cookies.remove('token');
     dispatch(userLogout());
     navigate('/login');
@@ -22,16 +24,22 @@ export default function Appbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to={'/'} className="text-white">Expenser </Link>
-            </Typography>
-          <Link to={'/login'} className="text-white">
-            <Button color="inherit">Login</Button>
-          </Link>
-          <Link to={'/register'} className="text-white">
-            <Button color="inherit">Register</Button>
-          </Link>
+          </Typography>
+          {
+            !auth ?
+            <div>
+              <Link to={'/login'} className="text-white">
+                <Button color="inherit">Login</Button>
+              </Link>
+              <Link to={'/register'} className="text-white">
+                <Button color="inherit">Register</Button>
+              </Link>
+            </div>
+            :
             <Button color="inherit" onClick={logout}>Logout</Button>
+          }
         </Toolbar>
       </AppBar>
     </Box>

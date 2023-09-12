@@ -10,15 +10,20 @@ import { Container, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
+import Cookies from 'js-cookie';
 import env from "react-dotenv";
 
 export default function DataTable({ transaction, fetchTransaction, setEditTransaction }) {
+    const token = Cookies.get('token');
     async function remove(id) {
         if (!window.confirm("Are You Sure ?")) return;
         // console.log("id -> ", id);
         // let a = 0;
         const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction/${id}`, {
             method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         });
         // console.log(res);
         if (res.ok) {
@@ -56,7 +61,7 @@ export default function DataTable({ transaction, fetchTransaction, setEditTransa
                                 <TableCell align="right">{row.description}</TableCell>
                                 <TableCell align="center">{formatDate(row.date)}</TableCell>
                                 <TableCell align='center'>
-                                    <IconButton aria-label="edit" color='primary' onClick={()=>setEditTransaction(row)}>
+                                    <IconButton aria-label="edit" color='primary' onClick={() => setEditTransaction(row)}>
                                         <EditSharpIcon />
                                     </IconButton>
                                     <IconButton aria-label="delete" color='primary' onClick={() => remove(row._id)}>

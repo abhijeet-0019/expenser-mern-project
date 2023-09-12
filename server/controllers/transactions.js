@@ -3,8 +3,9 @@ const Transaction = require("../models/transaction");
 const postTransaction = async (req, res) => {
     try {
         const { amount, description, date } = req.body;
-        console.log(req.body.amount);
+        console.log("--> req", req.user);
         const response = await Transaction.create({
+            user_id: req.user._id,
             amount,
             description,
             date,
@@ -29,7 +30,7 @@ const postTransaction = async (req, res) => {
 
 const getTransaction = async (req, res) => {
     try {
-        const response = await Transaction.find({}).sort({ createdAt: -1 });
+        const response = await Transaction.find({user_id: req.user._id}).sort({ createdAt: -1 });
         res.status(200).json({
             success: true,
             data: response,
